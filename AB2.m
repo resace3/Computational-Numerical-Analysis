@@ -6,13 +6,12 @@ un=[y0];
 un= cat(2,un,y0+0.5*DT*(f(y0,t)+DT*f(y0+f(y0,t),t+DT)));
 
 y=[y0];
-for ii=2:NSTEPS
+for ii=1:NSTEPS
     
     
-    ts = (ii)*DT;
-    ts1=ts-DT;
-    ts2=ts-2*DT;
-    un = cat(2,un,un(:,end)+0.5*DT*(3*f(un(:,end),ts1)-f(un(:,end-1),ts2)));
+    ts = (ii-1)*DT;
+    
+    un = cat(2,un,un(:,end)+0.5*DT*(3*f(un(:,end),ts)-f(un(:,end-1),ts-DT)));
 
     if mod(ii,IOSTEPS)==0
         y =cat(2,y,un(:,end));
